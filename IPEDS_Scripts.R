@@ -1,7 +1,7 @@
-#Install Libraries 
+##Install Libraries 
 library(tidyverse)
 
-#Import CSVs & Remove Extra Columns
+##Import CSVs & Remove Extra Columns
 AdmitPerc <- read.csv(file = 'https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/AdmitPercent.csv') 
 AdmitPerc <- AdmitPerc[-15]
 COA <- read.csv(file = 'https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/COA.csv')
@@ -29,4 +29,40 @@ Retention <- Retention[-27]
 Undup_Head <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/Unduplicated_Headcount.csv')
 Undup_Head <- Undup_Head[-27]
 
+
+##Clean Individual CSV Files by Renaming Columns 
+colnames(INST) <- c('INST_ID','INST_Name','Address','City','Zip','Longitude','Latitude')
+colnames(INST_SectorSize) <- c('INST_ID','INST_Name','State','Sector','Size')
+
+#Create Sector DF
+print(INST_SectorSizeLabels)
+Sector_Desc <- c("Public, 4-year or above","Private not-for-profit, 4-year or above")
+Sector <- c(1:2)
+Sector <- data.frame(Sector = c(1:2),
+                     Sector_Desc = c("Public, 4-year or above","Private not-for-profit, 4-year or above"))
+rm(Sector_Code,Sector_Desc)
+
+#Create Size DF
+Size <- data.frame(Size = INST_SectorSizeLabels[c(54:60),2],
+                   Size_Desc = INST_SectorSizeLabels[c(54:60),3])
+
+States <- data.frame(State = INST_SectorSizeLabels[c(1:51),2],
+                     State_Desc = INST_SectorSizeLabels[c(1:51),3])
+rm(INST_SectorSizeLabels)
+
+#Create Control, Land Grant, and Carnegie DFs
+print(INST_TypeLabels)
+
+Control <- data.frame(Control = INST_TypeLabels[c(1:2),2],
+                      Control_Desc = INST_TypeLabels[c(1:2),3])
+LandGrant <- data.frame(LandGrant = INST_TypeLabels[c(3:4),2],
+                        LandGrant_Desc = INST_TypeLabels[c(3:4),3])
+Carnegie <- data.frame(Carnegie = INST_TypeLabels[c(5:36),2],
+                       Carnegie_Desc = INST_TypeLabels[c(5:36),3])
+rm(INST_TypeLabels)
+
+#Rename INST_Type Columns
+colnames(INST_Type) <- c('INST_ID','INST_Name','Land Grant','Control','Carnegie')
+
+#Rename Retention Columns
 
