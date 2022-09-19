@@ -25,10 +25,11 @@ INST_TypeLabels <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS
 INST_Type <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/INSTType.csv')
 INST_Type <- INST_Type[-6]
 Retention <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/Retention.csv')
-Retention <- Retention[-27]
-Undup_Head <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/Unduplicated_Headcount.csv')
-Undup_Head <- Undup_Head[-27]
-
+Retention <- Retention[-9]
+Undup_Head <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS_Data/main/CSVs/Unduplicated_Headcount.csv')
+Undup_Head <- Undup_Head[-15]
+Stu2Faculty <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/Stu2Faculty.csv')
+Stu2Faculty <- Stu2Faculty[-9]
 
 ##Clean Individual CSV Files by Renaming Columns 
 colnames(INST) <- c('INST_ID','INST_Name','Address','City','Zip','Longitude','Latitude')
@@ -65,4 +66,23 @@ rm(INST_TypeLabels)
 colnames(INST_Type) <- c('INST_ID','INST_Name','Land Grant','Control','Carnegie')
 
 #Rename Retention Columns
+colnames(Retention) <- c('INST_ID','INST_Name','Fall 2020 Retention','Fall 2019 Retention',
+                         'Fall 2018 Retention','Fall 2017 Retention','Fall 2016 Retention',
+                         'Fall 2015 Retention')
+#Rename Stu2Faculty Columns
+colnames(Stu2Faculty) <- c('INST_ID','INST_Name','2020 Stu2Fac','2019 Stu2Fac','2018 Stu2Fac',
+                           '2017 Stu2Fac','2016 Stu2Fac','2015 Stu2Fac')
 
+#Rename Unduplicated Headcount Columns
+colnames(Undup_Head) <- c("INST_ID","INST_Name","Headcount_2021_Total",
+                          "Headcount_2021_UG","Headcount_1920_Total",
+                          "Headcount_1920_UG","Headcount_1819_Total",
+                          "Headcount_1819_UG","Headcount_1718_Total",
+                          "Headcount_1718_UG","Headcount_1617_Total",
+                          "Headcount_1617_UG","Headcount_1516_Total",
+                          "Headcount_1516_UG")
+
+#Rename GradRate Columns 
+colnames(GradRate) <- c("INST_ID","INST_Name","GR2020","GR2019","GR2018",
+                        "GR2017","GR2016","GR2015")
+#Rename FTE
