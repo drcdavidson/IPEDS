@@ -5,17 +5,21 @@ library(tidyverse)
 AdmitPerc <- read.csv(file = 'https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/AdmitPercent.csv') 
 AdmitPerc <- AdmitPerc[-15]
 COA <- read.csv(file = 'https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/COA.csv')
-COA <- COA[-39]
-Endowment <- read.csv(file = 'https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/Endowment.csv')
-Endowment <- Endowment[-15]
+COA <- COA[-17]
+EndowFASB <- read.csv(file = 'https://raw.githubusercontent.com/drcdavidson/IPEDS_Data/main/CSVs/EndowFASB.csv')
+EndowFASB <- EndowFASB[-9]
+EndowGASB <- read.csv(file = 'https://raw.githubusercontent.com/drcdavidson/IPEDS_Data/main/CSVs/EndowGASB.csv')
+EndowGASB <- EndowGASB[-9]
 Enrollment <- read.csv(file = 'https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/Enrollment.csv')
-Enrollment <- Enrollment[-56]
+Enrollment <- Enrollment[-21]
 FinAid <- read.csv(file = 'https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/FinAid.csv')
 FinAid <- FinAid[-21]
 FTE <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/FTE.csv')
 FTE <- FTE[-9]
 GradRate <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/GradRate.csv')
 GradRate <- GradRate[-9]
+Headcount <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/Headcount.csv')
+Headcount <- Headcount[-21]
 INST <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/INST.csv')
 INST <- INST[-8]
 INST_SectorSize <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/INST_SectorSize.csv')
@@ -26,8 +30,6 @@ INST_Type <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS/main/
 INST_Type <- INST_Type[-6]
 Retention <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/Retention.csv')
 Retention <- Retention[-9]
-Undup_Head <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS_Data/main/CSVs/Unduplicated_Headcount.csv')
-Undup_Head <- Undup_Head[-15]
 Stu2Faculty <- read.csv('https://raw.githubusercontent.com/drcdavidson/IPEDS/main/CSVs/Stu2Faculty.csv')
 Stu2Faculty <- Stu2Faculty[-9]
 
@@ -85,4 +87,47 @@ colnames(Undup_Head) <- c("INST_ID","INST_Name","Headcount_2021_Total",
 #Rename GradRate Columns 
 colnames(GradRate) <- c("INST_ID","INST_Name","GR2020","GR2019","GR2018",
                         "GR2017","GR2016","GR2015")
-#Rename FTE
+#Rename FTE Columns
+colnames(FTE) <- c("INST_ID","INST_Name","FTE2020","FTE2019","FTE2018",
+                   "FTE2017","FTE2016","FTE2015")
+
+#Rename AdmitPerc
+colnames(AdmitPerc) <- c("INST_ID","INST_Name",
+                         "Total_2020_App","Total_2020_Enroll",
+                         "Total_2019_App","Total_2019_Enroll",
+                         "Total_2018_App","Total_2018_Enroll",
+                         "Total_2017_App","Total_2017_Enroll",
+                         "Total_2016_App","Total_2016_Enroll",
+                         "Total_2015_App","Total_2015_Enroll")
+#Rename COA Columns
+colnames(COA)<- c("INST_ID","INST_Name",
+                  "IN_2122_ON","OUT_2122_ON",
+                  "IN_2021_ON","OUT_2021_ON",
+                  "IN_1920_ON","OUT_1920_ON",
+                  "IN_1819_ON","OUT_1819_ON",
+                  "IN_1718_ON","OUT_1718_ON",
+                  "IN_1617_ON","OUT_1617_ON",
+                  "IN_1516_ON","OUT_1516_ON")
+
+#Rename Endowment Columns
+colnames(EndowFASB) <- c("INST_ID","INST_Name",
+                          "FY20_Endow","FY19_Endow",
+                          "FY18_Endow","FY17_Endow",
+                          "FY16_Endow","FY15_Endow")
+colnames(EndowGASB) <- c("INST_ID","INST_Name",
+                         "FY20_Endow","FY19_Endow",
+                         "FY18_Endow","FY17_Endow",
+                         "FY16_Endow","FY15_Endow")
+
+#Drop NA Values in Combined EndowFASB & EndowGASB 
+#(Dropped colleges without endowments or missing data)
+Endow <- rbind(EndowFASB,EndowGASB)
+Endow <- Endow[complete.cases(Endow),]
+rm(EndowFASB,EndowGASB)
+
+#Rename Headount Columns
+colnames(Headcount) <- c("INST_ID","INST_Name","Head_21_TOTAL","Head_21_UG",
+                         "Head_21_GR","Head_20_TOTAL","Head_20_UG","Head_20_GR",
+                         "Head_19_TOTAL","Head_19_UG","Head_19_GR","Head_18_TOTAL",
+                         "Head_18_UG","Head_18_GR","Head_17_TOTAL","Head_17_UG",
+                         "Head_17_GR","Head_16_TOTAL","Head_16_UG","Head_16_GR")
