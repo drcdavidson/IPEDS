@@ -235,3 +235,8 @@ rm(FinAid)
 INST <- left_join(INST,Endow,by="INST_ID")
 rm(Endow)
 
+#Remove NA Cases
+INST <- INST[complete.cases(INST),]
+
+#Save Final CSV
+write.csv(INST,file="C:/Users/cdavi/OneDrive/Desktop/Documents/R_Projects/IPEDS_Data/Final_INST.csv",row.names = F)
