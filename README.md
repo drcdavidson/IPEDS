@@ -12,16 +12,4 @@ This gave be 2,370 sample institutions.
 
 #### Choosing Variables
 
-The following table provides information on the variables downloaded from IPEDS to create the final dataset.
-
-| Category                      | Subcategory           | IPEDS Variable Name                        | Renamed Variable | Year of the Data | Definition  |
-|--------------|------------|------------|------------|------------|------------|
-| Institutional Characteristics | Directory Information | UnitID                                     | INST_ID          | 2021-22          |             |
-|                               |                       | Institution Name                           | INST_Name        | 2021-22          |             |
-|                               |                       | Street address or post office box (HD2021) | Address          | 2021-22          |             |
-|                               |                       | City location of institution (HD2021)      | City             | 2021-22          |             |
-|                               |                       | ZIP code (HD2021)                          | Zip              | 2021-22          |             |
-|                               |                       | Longitude location of institution (HD2021) | Longitude        | 2021-22          |             |
-|                               |                       | Latitude location of institution (HD2021)  | Latitude         | 2021-22          |             |
-
-					
+A complete list of variables in the dataset can be found in :
