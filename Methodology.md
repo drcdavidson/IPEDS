@@ -8,4 +8,4 @@ This gave be 2,370 sample institutions.
 
 #### Choosing Variables
 
-A list of variables in the dataset can be found below. 
+A list of variables in the dataset can be found 
